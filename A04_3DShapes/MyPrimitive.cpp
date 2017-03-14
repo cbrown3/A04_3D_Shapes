@@ -110,16 +110,25 @@ void MyPrimitive::GenerateCone(float a_fRadius, float a_fHeight, int a_nSubdivis
 	Init();
 
 	//Your code starts here
-	float fValue = 0.5f;
-	//3--2
-	//|  |
-	//0--1
-	vector3 point0(-fValue, -fValue, fValue); //0
-	vector3 point1(fValue, -fValue, fValue); //1
-	vector3 point2(fValue, fValue, fValue); //2
-	vector3 point3(-fValue, fValue, fValue); //3
 
-	AddQuad(point0, point1, point3, point2);
+	float fValue = 0.5f * a_fRadius;
+	/*
+	  0
+	 / \
+	1---2
+	*/
+
+	vector3 point0(0, a_fHeight, 0); //0
+	vector3 point1(-fValue, -fValue, fValue); //1
+	vector3 point2(fValue, -fValue, fValue); //2
+	vector3 point3(-fValue, -fValue, -fValue); //3
+	vector3 point4(fValue, -fValue, -fValue); //4
+
+	AddQuad(point0, point1, point2, point0);
+	AddQuad(point0, point1, point3, point0);
+	AddQuad(point0, point2, point4, point0);
+	AddQuad(point0, point3, point4, point0);
+	AddQuad(point1, point3, point2, point4);
 
 	//Your code ends here
 	CompileObject(a_v3Color);
